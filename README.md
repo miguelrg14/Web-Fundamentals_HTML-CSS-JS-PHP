@@ -1,18 +1,18 @@
 # Web projects: HTML, CSS, JavaScript, PHP and MySQL
 
-[![CI](https://github.com/miguelrg14/Web-Pages_Examples/actions/workflows/ci.yml/badge.svg)](https://github.com/miguelrg14/Web-Pages_Examples/actions/workflows/ci.yml)
+[![CI](https://github.com/miguelrg14/Web-Fundamentals_HTML-CSS-JS-PHP/actions/workflows/ci.yml/badge.svg)](https://github.com/miguelrg14/Web-Fundamentals_HTML-CSS-JS-PHP/actions/workflows/ci.yml)
 
 Coursework from the web development subjects of my Computer Science & Video Game Engineering degree at ESNE,
 refactored into one repository: three static sites you can **open in the browser right now**, and an online
 **furniture shop in PHP and MySQL** with sign-up, login, a shopping cart and orders.
 
-**▶ Live demos: [miguelrg14.github.io/Web-Pages_Examples](https://miguelrg14.github.io/Web-Pages_Examples/)**
+**▶ Live demos: [miguelrg14.github.io/Web-Fundamentals_HTML-CSS-JS-PHP](https://miguelrg14.github.io/Web-Fundamentals_HTML-CSS-JS-PHP/)**
 
 | Project | What it shows | Try it |
 |---|---|---|
-| [Costa Verde](sites/costa-verde) | Two-page tourism site: semantic HTML, fixed menu, CSS animations, in-page navigation | [Live](https://miguelrg14.github.io/Web-Pages_Examples/costa-verde/) |
-| [Personal site](sites/personal-site) | Portfolio with my art, programming projects and music; audio, video and a contact form | [Live](https://miguelrg14.github.io/Web-Pages_Examples/personal-site/) |
-| [DNI letter calculator](sites/dni-validator) | JavaScript form validation and DOM updates; works out and checks Spanish DNI/NIE letters | [Live](https://miguelrg14.github.io/Web-Pages_Examples/dni-validator/) |
+| [Costa Verde](sites/costa-verde) | Two-page tourism site: semantic HTML, fixed menu, CSS animations, in-page navigation | [Live](https://miguelrg14.github.io/Web-Fundamentals_HTML-CSS-JS-PHP/costa-verde/) |
+| [Personal site](sites/personal-site) | Portfolio with my art, programming projects and music; audio, video and a contact form | [Live](https://miguelrg14.github.io/Web-Fundamentals_HTML-CSS-JS-PHP/personal-site/) |
+| [DNI letter calculator](sites/dni-validator) | JavaScript form validation and DOM updates; works out and checks Spanish DNI/NIE letters | [Live](https://miguelrg14.github.io/Web-Fundamentals_HTML-CSS-JS-PHP/dni-validator/) |
 | [Furniture shop](furniture-shop) | PHP + MySQL: accounts, sessions, cart and orders, built with security in mind | [Run with Docker](#furniture-shop-php--mysql) |
 
 ## Screenshots

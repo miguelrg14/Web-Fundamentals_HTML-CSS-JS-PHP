@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Works out the check letter of a Spanish DNI or NIE and validates complete IDs.">
+    <title>DNI letter calculator</title>
+    <link rel="icon" href="images/favicon.png">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/dni.js" defer></script>
+    <script src="js/app.js" defer></script>
+</head>
+<body>
+    <header>
+        <nav aria-label="Main">
+            <a class="title" href="index.html">DNI letter calculator</a>
+        </nav>
+    </header>
+
+    <main>
+        <img class="id-card" src="images/id-card.png" alt="" width="800" height="800">
+
+        <form id="dni-form" novalidate>
+            <h1>Type the numbers of your DNI!</h1>
+            <img class="calculator" src="images/calculator.png" alt="" width="296" height="400">
+
+            <div class="field">
+                <label for="dni-input">DNI or NIE</label>
+                <input id="dni-input" name="dni" type="text" inputmode="text" autocomplete="off"
+                       maxlength="12" placeholder="12345678" aria-describedby="dni-message">
+                <img class="mark error-mark" src="images/error.png" alt="Invalid" width="64" height="64">
+                <img class="mark check-mark" src="images/check.png" alt="Valid" width="64" height="64">
+            </div>
+
+            <button type="submit">Calculate</button>
+
+            <p class="result">
+                <label for="dni-result">The letter is</label>
+                <output id="dni-result" for="dni-input"></output>
+            </p>
+            <p id="dni-message" class="message" role="status"></p>
+        </form>
+
+        <div class="help-box">
+            <button id="help-button" class="help-button" type="button" aria-expanded="false" aria-controls="help">
+                <img src="images/help.png" alt="Help" width="100" height="100">
+            </button>
+            <div id="help" class="help" hidden>
+                <p>Type the 8 digits of a DNI to get its letter, for example <kbd>12345678</kbd>.</p>
+                <p>Add the letter at the end to check a complete DNI: <kbd>12345678Z</kbd>.</p>
+                <p>NIEs for foreign residents work too: <kbd>X1234567</kbd> or <kbd>X1234567L</kbd>.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p><strong>Made by Miguel Rodríguez Gallego</strong> · Coursework for the Computer Science &amp; Video Game Engineering degree · <a href="../">All projects</a></p>
+    </footer>
+</body>
+</html>

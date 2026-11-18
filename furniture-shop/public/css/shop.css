@@ -1,0 +1,322 @@
+/* Furniture Shop */
+
+/* Fonts are served from this site (no third-party requests). */
+@font-face {
+    font-family: "Yellowtail";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("../fonts/yellowtail-latin-400-normal.woff2") format("woff2");
+}
+
+:root {
+    --olive: #60695c;
+    --navy: #1c2c34;
+    --sand: #ecce8e;
+    --sky: #8fb8de;
+    --foam: #edf6f9;
+    --danger: #b3261e;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background-color: var(--olive);
+    font-family: Calibri, "Segoe UI", sans-serif;
+    font-size: 1.1rem;
+}
+
+@keyframes slide-down {
+    from { opacity: 0; transform: translateY(-100%); }
+    to   { opacity: 1; transform: none; }
+}
+
+@keyframes title-in {
+    from { opacity: 0; transform: translateX(-10%); }
+    to   { opacity: 1; transform: none; }
+}
+
+/* Top bar */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background-color: var(--navy);
+    animation: slide-down 0.5s;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.4rem 5vw;
+}
+
+.brand {
+    font-family: "Yellowtail", cursive;
+    font-size: 1.8rem;
+    color: var(--foam);
+}
+
+nav ul {
+    display: flex;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+nav img {
+    display: block;
+    width: 2.6rem;
+    height: 2.6rem;
+    transition: transform 0.2s;
+}
+
+nav a:hover img,
+nav a:focus-visible img,
+nav button:hover img,
+nav button:focus-visible img {
+    transform: scale(1.2);
+}
+
+nav button {
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+/* Full-width picture with the page title */
+.hero {
+    position: relative;
+}
+
+.hero img {
+    display: block;
+    width: 100%;
+    height: min(45vw, 32rem);
+    object-fit: cover;
+}
+
+h1 {
+    position: absolute;
+    left: 10%;
+    bottom: 10%;
+    margin: 0;
+    font-family: "Yellowtail", cursive;
+    font-weight: 400;
+    font-size: clamp(2.5rem, 1rem + 6vw, 7rem);
+    color: var(--foam);
+    text-decoration: underline;
+    text-shadow: 0.3vw 0.3vw 0.3vw black;
+    animation: title-in 2s;
+}
+
+h2 {
+    font-family: Verdana, sans-serif;
+    text-align: center;
+}
+
+.card {
+    border: 5px solid black;
+    border-radius: 10px;
+    background-color: var(--sand);
+}
+
+/* Login and sign-up form, overlapping the picture */
+.credentials {
+    position: relative;
+    display: grid;
+    gap: 1rem;
+    width: min(26rem, 90vw);
+    margin: -8rem auto 1rem;
+    padding: 2rem;
+}
+
+label {
+    display: grid;
+    gap: 0.3rem;
+    font-weight: bold;
+}
+
+input {
+    padding: 0.5rem;
+    border: 2px solid black;
+    border-radius: 6px;
+    font: inherit;
+}
+
+button {
+    padding: 0.5rem 1.4rem;
+    border: 2px solid black;
+    border-radius: 6px;
+    background-color: var(--navy);
+    color: white;
+    font: inherit;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover,
+button:focus-visible {
+    background-color: #2f4855;
+}
+
+button.danger {
+    background-color: var(--danger);
+}
+
+.error {
+    margin: 0;
+    padding: 0.5rem;
+    border-radius: 6px;
+    background-color: #f9dedc;
+    color: var(--danger);
+    font-weight: bold;
+}
+
+.notice {
+    width: min(40rem, 90vw);
+    margin: 1rem auto;
+    padding: 0.7rem;
+    border-radius: 6px;
+    background-color: var(--foam);
+    text-align: center;
+    font-weight: bold;
+}
+
+.switch {
+    margin: 0 0 2rem;
+    text-align: center;
+    color: white;
+}
+
+.switch a,
+.order a {
+    color: inherit;
+    font-weight: bold;
+}
+
+/* Product catalog */
+.products {
+    padding: 0 5vw;
+    color: white;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 22rem));
+    justify-content: center;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.product {
+    padding: 1rem;
+    color: black;
+    text-align: center;
+}
+
+.product img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.product h3 {
+    margin: 0.6rem 0 0.2rem;
+    color: var(--navy);
+}
+
+.price {
+    margin: 0 0 0.8rem;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.product form {
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.product input {
+    width: 5rem;
+}
+
+/* Cart and order summary */
+.order {
+    width: min(50rem, 90vw);
+    margin: 2rem auto;
+    padding: 1rem 2rem 2rem;
+    text-align: center;
+}
+
+table {
+    width: 100%;
+    margin-bottom: 1rem;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+th,
+td {
+    padding: 0.5rem;
+    border-bottom: 1px solid rgb(0 0 0 / 0.3);
+}
+
+tfoot th,
+tfoot td {
+    border-bottom: none;
+    font-weight: bold;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+footer {
+    padding: 0.6rem;
+    text-align: center;
+    background-color: var(--sky);
+}
+
+footer p {
+    margin: 0.3rem 0;
+    font-style: italic;
+}
+
+footer strong {
+    font-style: normal;
+}
+
+@media (max-width: 600px) {
+    .credentials {
+        margin-top: 1rem;
+    }
+
+    .order {
+        padding: 1rem;
+        overflow-x: auto;
+    }
+}

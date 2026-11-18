@@ -1,0 +1,27 @@
+{
+    "name": "miguelrg14/furniture-shop",
+    "description": "Online furniture shop in plain PHP and MySQL: sign-up, login, cart and orders.",
+    "type": "project",
+    "license": "MIT",
+    "require": {
+        "php": ">=8.2",
+        "ext-pdo": "*",
+        "ext-pdo_mysql": "*",
+        "ext-mbstring": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^11.5"
+    },
+    "autoload": {
+        "psr-4": { "Shop\\": "src/" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Shop\\Tests\\": "tests/" }
+    },
+    "scripts": {
+        "test": "phpunit"
+    },
+    "config": {
+        "sort-packages": true
+    }
+}

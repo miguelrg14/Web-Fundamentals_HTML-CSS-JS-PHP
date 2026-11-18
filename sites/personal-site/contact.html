@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Send a message to Miguel Rodríguez Gallego.">
+    <title>Contact · Miguel Rodríguez Gallego</title>
+    <link rel="icon" href="images/favicon.png">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/contact.js" defer></script>
+</head>
+<body>
+    <header>
+        <nav aria-label="Main">
+            <a class="brand" href="index.html">Miguel<span>Rodríguez</span></a>
+            <ul>
+                <li><a href="index.html">About me</a></li>
+                <li><a href="design.html">Design and art</a></li>
+                <li><a href="programming.html">Programming</a></li>
+                <li><a href="sound.html">Sound</a></li>
+            </ul>
+            <a class="contact-button" href="contact.html" aria-current="page">Contact</a>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h1>Contact me!</h1>
+            <form id="contact-form">
+                <label>Your name
+                    <input type="text" name="name" autocomplete="name" required maxlength="80">
+                </label>
+                <label>Your message
+                    <textarea name="message" required maxlength="2000"></textarea>
+                </label>
+                <button type="submit">Send</button>
+            </form>
+            <p class="form-note">The message opens in your email app, ready to send.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>Website made by Miguel Rodríguez Gallego</p>
+        <p><a href="mailto:miguelrodriguezgallego1@gmail.com">miguelrodriguezgallego1@gmail.com</a></p>
+        <p><a href="../">All projects</a></p>
+    </footer>
+</body>
+</html>

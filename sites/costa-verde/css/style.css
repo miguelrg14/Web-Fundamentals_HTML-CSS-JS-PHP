@@ -1,0 +1,220 @@
+/* Costa Verde: two-page tourism site about the coast of Asturias. */
+
+/* Fonts are served from this site (no third-party requests). */
+@font-face {
+    font-family: "Yellowtail";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("../fonts/yellowtail-latin-400-normal.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 900;
+    font-display: swap;
+    src: url("../fonts/montserrat-latin-900-normal.woff2") format("woff2");
+}
+
+:root {
+    --sea: #679b96;
+    --sea-light: #83c5be;
+    --foam: #edf6f9;
+    --night: #000;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background-color: var(--sea);
+    font-family: Calibri, "Segoe UI", sans-serif;
+}
+
+/* Navigation bar: fixed at the top, slides in when the page loads. */
+@keyframes slide-down {
+    from { opacity: 0; top: -100px; }
+    to   { opacity: 1; top: 0; }
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background-color: var(--night);
+    animation: slide-down 0.5s;
+}
+
+header ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 6vw;
+    margin: 0;
+    padding: 0.8rem 0 0.8rem 10vw;
+    list-style: none;
+}
+
+header a {
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 900;
+    transition: transform 0.2s, color 0.2s;
+}
+
+header a:hover,
+header a:focus-visible {
+    transform: scale(1.2);
+    color: var(--sea-light);
+}
+
+header a:active {
+    transform: scale(1.1);
+}
+
+/* Hero: full-width photo with the animated title on top. */
+@keyframes title-in {
+    from { opacity: 0; padding-left: 0; }
+    to   { opacity: 1; padding-left: 25%; }
+}
+
+.hero {
+    position: relative;
+}
+
+.hero h1 {
+    position: absolute;
+    margin: 0;
+    padding-top: 10vw;
+    padding-left: 25%;
+    font-family: "Yellowtail", cursive;
+    font-weight: 400;
+    font-size: 10vw;
+    color: var(--foam);
+    text-decoration: underline;
+    text-shadow: 0.3vw 0.3vw 0.3vw black;
+    animation: title-in 2s;
+}
+
+.hero img {
+    display: block;
+    width: 100%;
+    height: 60vw;
+    object-fit: cover;
+}
+
+/* Content */
+article {
+    padding: 1rem 0 1.5rem;
+    text-align: justify;
+}
+
+article.alt {
+    background-color: var(--sea-light);
+}
+
+article p,
+article ul {
+    margin-left: 10vw;
+    margin-right: 10vw;
+}
+
+article ul {
+    padding-left: 2rem;
+}
+
+h2,
+h3 {
+    padding-top: 20px;
+    text-align: center;
+    font-family: Verdana, sans-serif;
+}
+
+h2 {
+    font-size: xx-large;
+}
+
+/* Section anchors land below the fixed header. */
+[id] {
+    scroll-margin-top: 4rem;
+}
+
+figure {
+    margin: 1.5rem auto;
+    text-align: center;
+}
+
+figure img {
+    display: block;
+    width: min(400px, 90vw);
+    height: 300px;
+    margin: auto;
+    object-fit: cover;
+    transition: transform 0.2s;
+    cursor: zoom-in;
+}
+
+/* Holding the mouse down on a photo enlarges it. */
+figure img:active {
+    transform: scale(2);
+}
+
+figcaption {
+    margin-top: 0.4rem;
+    font-style: italic;
+}
+
+.inline-link {
+    color: var(--foam);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* "Back to top" round button at the end of each section. */
+.back-to-top {
+    display: block;
+    width: fit-content;
+    margin: 0 auto;
+}
+
+.back-to-top svg {
+    display: block;
+    width: 30px;
+    height: 30px;
+    padding: 8px;
+    border-radius: 50%;
+    background-color: white;
+    transition: transform 0.2s;
+}
+
+.back-to-top:hover svg,
+.back-to-top:focus-visible svg {
+    transform: scale(1.2);
+    background-color: var(--foam);
+}
+
+footer {
+    padding: 10px 0;
+    text-align: center;
+    background-color: var(--sea-light);
+}
+
+footer p {
+    margin: 0.3rem 0;
+    font-style: italic;
+}
+
+footer strong {
+    font-style: normal;
+    font-weight: 900;
+}
+
+footer a {
+    color: inherit;
+}

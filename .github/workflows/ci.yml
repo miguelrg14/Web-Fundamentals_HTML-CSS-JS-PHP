@@ -1,0 +1,100 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  sites:
+    name: Static sites (HTML + JavaScript)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Validate the HTML
+        run: npm run validate
+      - name: JavaScript tests
+        run: npm test
+
+  shop:
+    name: Furniture shop (PHP + MySQL)
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.4
+        env:
+          MYSQL_DATABASE: furniture_shop
+          MYSQL_USER: shop
+          MYSQL_PASSWORD: ci-password
+          MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 --silent"
+          --health-interval=3s --health-timeout=5s --health-retries=40
+    env:
+      DB_HOST: 127.0.0.1
+      DB_PORT: 3306
+      DB_NAME: furniture_shop
+      DB_USER: shop
+      DB_PASSWORD: ci-password
+    defaults:
+      run:
+        working-directory: furniture-shop
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.3"
+          extensions: pdo_mysql, mbstring
+          coverage: none
+      - name: Check PHP syntax
+        run: find src public tests -name '*.php' -print0 | xargs -0 -n1 php -l
+      - run: composer install --no-interaction --no-progress
+      - name: Unit and database tests
+        run: vendor/bin/phpunit
+      - name: Load a fresh database
+        run: mysql -h 127.0.0.1 -u shop -pci-password furniture_shop < database/schema.sql
+      - name: End-to-end test over HTTP
+        run: |
+          php -S 127.0.0.1:8080 -t public > /tmp/php-server.log 2>&1 &
+          sleep 1
+          SAVE_PAGES=/tmp/pages tests/smoke.sh http://127.0.0.1:8080
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Validate the HTML the shop generates
+        working-directory: .
+        run: |
+          npm ci
+          npx html-validate /tmp/pages/*.html
+      - name: Server log
+        if: failure()
+        run: cat /tmp/php-server.log
+
+  docker:
+    name: Docker Compose
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: furniture-shop
+    steps:
+      - uses: actions/checkout@v4
+      - name: Start the shop and its database
+        run: docker compose up --build --detach --wait --wait-timeout 180
+      - name: End-to-end test against the containers
+        run: tests/smoke.sh http://localhost:8080
+      - name: Container logs
+        if: failure()
+        run: docker compose logs
+      - name: Stop
+        if: always()
+        run: docker compose down --volumes

@@ -1,0 +1,36 @@
+# docker compose up --build  ->  http://localhost:8080
+# The database is created from database/schema.sql the first time.
+# To start again from an empty shop: docker compose down -v
+services:
+  db:
+    image: mysql:8.4
+    environment:
+      MYSQL_DATABASE: furniture_shop
+      MYSQL_USER: shop
+      MYSQL_PASSWORD: ${DB_PASSWORD:-shop-password}
+      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+    volumes:
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/schema.sql:ro
+      - db-data:/var/lib/mysql
+    healthcheck:
+      # Ready once the shop's tables exist and accept connections over TCP.
+      test: ["CMD-SHELL", "mysql -h 127.0.0.1 -ushop -p\"$$MYSQL_PASSWORD\" -e 'SELECT 1 FROM products LIMIT 1' furniture_shop"]
+      interval: 3s
+      timeout: 5s
+      retries: 40
+
+  web:
+    build: .
+    ports:
+      - "8080:80"
+    environment:
+      DB_HOST: db
+      DB_NAME: furniture_shop
+      DB_USER: shop
+      DB_PASSWORD: ${DB_PASSWORD:-shop-password}
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  db-data:

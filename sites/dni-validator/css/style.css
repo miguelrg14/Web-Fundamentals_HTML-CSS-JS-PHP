@@ -1,0 +1,297 @@
+/* DNI letter calculator */
+
+/* Fonts are served from this site (no third-party requests). */
+@font-face {
+    font-family: "Yellowtail";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("../fonts/yellowtail-latin-400-normal.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url("../fonts/montserrat-latin-700-normal.woff2") format("woff2");
+}
+
+:root {
+    --mint: #a4d4b4;
+    --sea: #679b96;
+    --green: #3bc14a;
+    --dark-green: #4da167;
+    --error: #f9b5ac;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    background-color: var(--mint);
+    font-family: Calibri, "Segoe UI", sans-serif;
+}
+
+@keyframes slide-down {
+    from { opacity: 0; transform: translateY(-100%); }
+    to   { opacity: 1; transform: none; }
+}
+
+@keyframes fade-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes slide-in {
+    from { opacity: 0; transform: translateX(-2rem); }
+    to   { opacity: 1; transform: none; }
+}
+
+header {
+    padding: 0.4rem 10vw;
+    background-color: black;
+    animation: slide-down 0.5s;
+}
+
+.title {
+    display: inline-block;
+    font-family: "Yellowtail", cursive;
+    font-size: xx-large;
+    color: white;
+    text-decoration: none;
+    transition: transform 0.2s;
+}
+
+.title:hover,
+.title:focus-visible {
+    transform: scale(1.1);
+}
+
+main {
+    flex: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+    gap: 2rem;
+    align-items: start;
+    padding: 2rem 3vw;
+}
+
+.id-card {
+    width: 100%;
+    height: auto;
+}
+
+/* The form card */
+form {
+    position: relative;
+    display: grid;
+    justify-items: center;
+    gap: 1rem;
+    padding: 1.5rem 1rem 1.5rem 9rem;
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: var(--sea);
+}
+
+h1 {
+    margin: 0;
+    font-family: "Montserrat", sans-serif;
+    font-size: clamp(1.5rem, 1rem + 2vw, 2.6rem);
+    text-align: center;
+    color: white;
+    text-shadow: 1px 1px 1px black;
+    animation: fade-in 2s;
+}
+
+.calculator {
+    position: absolute;
+    left: 1.5rem;
+    top: 5rem;
+    width: 6rem;
+    height: auto;
+}
+
+.field {
+    position: relative;
+    display: grid;
+    justify-items: center;
+    gap: 0.3rem;
+}
+
+.field label {
+    font-weight: bold;
+    color: white;
+}
+
+#dni-input {
+    width: 14rem;
+    height: 3.2rem;
+    border: 5px solid black;
+    font: inherit;
+    font-size: 1.4rem;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+/* Green when the ID is valid, red when it is not. */
+.valid #dni-input {
+    background-color: var(--green);
+}
+
+.invalid #dni-input {
+    background-color: var(--error);
+}
+
+.mark {
+    position: absolute;
+    right: -3.2rem;
+    bottom: 0.4rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    visibility: hidden;
+}
+
+.valid .check-mark,
+.invalid .error-mark {
+    visibility: visible;
+}
+
+form button {
+    width: 14rem;
+    height: 3.2rem;
+    border: 3px solid black;
+    background-color: white;
+    font: inherit;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: transform 0.2s, color 0.2s;
+}
+
+form button:hover,
+form button:focus-visible {
+    transform: scale(1.1);
+    color: var(--green);
+}
+
+form button:active {
+    transform: scale(1.05);
+}
+
+.result {
+    margin: 0;
+    padding: 0.6rem 2.5rem;
+    border: 2px solid black;
+    border-radius: 50px;
+    background-color: var(--green);
+    font-size: 1.2rem;
+}
+
+.result output {
+    display: inline-block;
+    min-width: 3rem;
+    margin-left: 0.5rem;
+    padding: 0.1rem 0.6rem;
+    border: 1px solid black;
+    background-color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+.invalid .result output {
+    background-color: var(--error);
+}
+
+.message {
+    min-height: 1.5em;
+    margin: 0;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Help: the "?" button shows or hides the explanation. */
+.help-box {
+    grid-column: 2;
+}
+
+.help-button {
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.help-button:hover,
+.help-button:focus-visible {
+    transform: scale(1.2);
+}
+
+.help-button img {
+    display: block;
+    width: 3.5rem;
+    height: 3.5rem;
+}
+
+.help {
+    animation: slide-in 0.5s;
+}
+
+kbd {
+    padding: 0.1rem 0.3rem;
+    border: 1px solid #333;
+    border-radius: 4px;
+    background-color: white;
+}
+
+footer {
+    padding: 0.5rem;
+    text-align: center;
+    background-color: var(--dark-green);
+}
+
+footer p {
+    margin: 0;
+    font-style: italic;
+}
+
+footer strong {
+    font-style: normal;
+}
+
+footer a {
+    color: inherit;
+}
+
+@media (max-width: 960px) {
+    main {
+        grid-template-columns: 1fr;
+    }
+
+    .id-card {
+        max-width: 20rem;
+        justify-self: center;
+    }
+
+    form {
+        padding-left: 1rem;
+    }
+
+    .calculator {
+        display: none;
+    }
+
+    .help-box {
+        grid-column: 1;
+    }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "web-projects",
+  "private": true,
+  "description": "Static sites (HTML, CSS, JavaScript) and their checks.",
+  "license": "MIT",
+  "scripts": {
+    "test": "node --test",
+    "validate": "html-validate \"sites/**/*.html\""
+  },
+  "devDependencies": {
+    "html-validate": "^11.0.0"
+  }
+}

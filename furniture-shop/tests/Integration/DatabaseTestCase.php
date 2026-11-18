@@ -31,7 +31,7 @@ abstract class DatabaseTestCase extends TestCase
         }
     }
 
-    protected function count(string $table): int
+    protected function rowsIn(string $table): int
     {
         return (int) $this->db->query("SELECT COUNT(*) FROM {$table}")->fetchColumn();
     }

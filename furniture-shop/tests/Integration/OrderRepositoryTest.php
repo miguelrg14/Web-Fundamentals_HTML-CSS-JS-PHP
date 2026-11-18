@@ -77,8 +77,8 @@ final class OrderRepositoryTest extends DatabaseTestCase
             $this->orders->place($this->userId, $lines);
             self::fail('The order should have failed.');
         } catch (PDOException) {
-            self::assertSame(0, $this->count('orders'));
-            self::assertSame(0, $this->count('order_items'));
+            self::assertSame(0, $this->rowsIn('orders'));
+            self::assertSame(0, $this->rowsIn('order_items'));
             self::assertFalse($this->db->inTransaction());
         }
     }

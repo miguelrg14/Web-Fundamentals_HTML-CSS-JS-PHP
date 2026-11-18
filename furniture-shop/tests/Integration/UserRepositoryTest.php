@@ -53,7 +53,7 @@ final class UserRepositoryTest extends DatabaseTestCase
         $this->users->register('ana@example.com', 'correct horse');
 
         self::assertNull($this->users->authenticate("' OR '1'='1' -- ", "' OR '1'='1"));
-        self::assertSame(1, $this->count('users'));
+        self::assertSame(1, $this->rowsIn('users'));
     }
 
     public function testAnEmailCanOnlyBeUsedOnce(): void
@@ -81,7 +81,7 @@ final class UserRepositoryTest extends DatabaseTestCase
             $this->users->register($email, $password);
             self::fail('The sign-up should have been refused.');
         } catch (ValidationException) {
-            self::assertSame(0, $this->count('users'));
+            self::assertSame(0, $this->rowsIn('users'));
         }
     }
 

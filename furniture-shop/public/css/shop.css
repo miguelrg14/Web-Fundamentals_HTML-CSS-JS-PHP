@@ -24,6 +24,8 @@
 
 html {
     scroll-behavior: smooth;
+    /* Keeps content that the page scrolls to from hiding under the fixed top bar. */
+    scroll-padding-top: 4.5rem;
 }
 
 body {

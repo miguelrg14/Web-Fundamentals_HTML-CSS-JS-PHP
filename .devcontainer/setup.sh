@@ -10,7 +10,7 @@ sudo apt-get update -qq
 sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq mariadb-server > /dev/null
 
 if ! php -m | grep -qi '^pdo_mysql$'; then
-    sudo docker-php-ext-install pdo_mysql > /dev/null
+    sudo PHP_INI_DIR="$PHP_INI_DIR" docker-php-ext-install pdo_mysql > /dev/null
 fi
 
 npm ci --no-audit --no-fund

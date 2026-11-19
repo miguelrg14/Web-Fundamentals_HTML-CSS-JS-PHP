@@ -20,7 +20,8 @@ const Dni = (() => {
     /**
      * Reads what the user typed: "12345678" gives its letter, "12345678Z" also checks that the
      * letter is right, and "X1234567L" is a NIE. Spaces, dots and dashes are ignored.
-     * Returns { ok: true, letter, id } or { ok: false, error }.
+     * Returns { ok: true, letter, id, number, remainder } or { ok: false, error }:
+     * number is what the letter is worked out from, and remainder is number mod 23.
      */
     function check(input) {
         const text = String(input ?? "").toUpperCase().replace(/[\s.-]/g, "");
@@ -47,10 +48,10 @@ const Dni = (() => {
         if (typedLetter !== "" && typedLetter !== letter) {
             return { ok: false, error: `The letter ${typedLetter} is wrong: it should be ${letter} (${id}).` };
         }
-        return { ok: true, letter, id };
+        return { ok: true, letter, id, number, remainder: number % 23 };
     }
 
-    return { letterFor, check };
+    return { LETTERS, letterFor, check };
 })();
 
 if (typeof module !== "undefined") {

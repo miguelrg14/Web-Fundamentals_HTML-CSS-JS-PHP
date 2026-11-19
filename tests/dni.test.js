@@ -25,11 +25,11 @@ test("letterFor rejects numbers out of range", () => {
 });
 
 test("check works out the letter of a DNI", () => {
-    assert.deepEqual(Dni.check("12345678"), { ok: true, letter: "Z", id: "12345678Z" });
+    assert.deepEqual(Dni.check("12345678"), { ok: true, letter: "Z", id: "12345678Z", number: 12345678, remainder: 14 });
 });
 
 test("check pads short numbers to eight digits", () => {
-    assert.deepEqual(Dni.check("1"), { ok: true, letter: "R", id: "00000001R" });
+    assert.deepEqual(Dni.check("1"), { ok: true, letter: "R", id: "00000001R", number: 1, remainder: 1 });
 });
 
 test("check accepts a complete DNI with the right letter, in any case and with separators", () => {
@@ -45,7 +45,8 @@ test("check reports a wrong letter and says which one is right", () => {
 });
 
 test("check supports NIEs", () => {
-    assert.deepEqual(Dni.check("X1234567"), { ok: true, letter: "L", id: "X1234567L" });
+    assert.deepEqual(Dni.check("X1234567"), { ok: true, letter: "L", id: "X1234567L", number: 1234567, remainder: 19 });
+    assert.equal(Dni.check("Y1234567").number, 11234567);
     assert.equal(Dni.check("Y1234567X").ok, true);
     assert.equal(Dni.check("Z1234567R").ok, true);
     assert.equal(Dni.check("X1234567A").ok, false);
@@ -60,5 +61,13 @@ test("check rejects empty and malformed input", () => {
         const result = Dni.check(bad);
         assert.equal(result.ok, false, String(bad));
         assert.ok(result.error.length > 0);
+    }
+});
+
+test("the letter table has the 23 official letters, each once", () => {
+    assert.equal(Dni.LETTERS.length, 23);
+    assert.equal(new Set(Dni.LETTERS).size, 23);
+    for (const unused of "IÑOU") {
+        assert.ok(!Dni.LETTERS.includes(unused), unused);
     }
 });

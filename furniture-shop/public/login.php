@@ -28,9 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     http_response_code(401);
 }
 
-page_start('Log in', 'login.jpg');
-credentials_form('login.php', 'Log in', $email, $error, 'current-password');
-?>
-        <p class="switch">New here? <a href="register.php">Create an account</a></p>
-<?php
+page_start('Log in', 'login.jpg', static function () use ($email, $error): void {
+    credentials_form('login.php', 'Log in', $email, $error, 'current-password', ['New here?', 'Create an account', 'register.php']);
+});
 page_end();

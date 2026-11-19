@@ -2,8 +2,14 @@
 
 declare(strict_types=1);
 
-/** Opens the page: <head>, the top bar and a full-width picture with the page title on it. */
-function page_start(string $title, string $heroImage): void
+/**
+ * Opens the page: <head>, the top bar and the entrance, a picture that fills the first screen
+ * with the page title in the middle.
+ *
+ * @param callable|null $heroContent prints more content centred under the title (the login form)
+ * @param string|null   $next        id of the section the "scroll down" arrow leads to
+ */
+function page_start(string $title, string $heroImage, ?callable $heroContent = null, ?string $next = null): void
 {
     $loggedIn = current_user_id() !== null;
     ?>
@@ -39,8 +45,16 @@ function page_start(string $title, string $heroImage): void
 
     <main>
         <div class="hero">
-            <h1><?= e($title) ?></h1>
             <img src="images/<?= e($heroImage) ?>" alt="" width="1600" height="1067">
+            <h1><?= e($title) ?></h1>
+<?php if ($heroContent !== null) {
+        $heroContent();
+    } ?>
+<?php if ($next !== null): ?>
+            <a class="scroll-hint" href="#<?= e($next) ?>" aria-label="Scroll down">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 9l7 7 7-7" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+<?php endif ?>
         </div>
 <?php
     $message = flash();
@@ -63,8 +77,12 @@ function page_end(): void
 <?php
 }
 
-/** The email + password form shared by the login and sign-up pages. */
-function credentials_form(string $action, string $button, string $email, ?string $error, string $passwordAutocomplete): void
+/**
+ * The email + password form shared by the login and sign-up pages.
+ *
+ * @param array{0: string, 1: string, 2: string} $switch text, link text and address of the link to the other page
+ */
+function credentials_form(string $action, string $button, string $email, ?string $error, string $passwordAutocomplete, array $switch): void
 {
     ?>
         <form class="card credentials" action="<?= e($action) ?>" method="post">
@@ -80,6 +98,7 @@ function credentials_form(string $action, string $button, string $email, ?string
                     $passwordAutocomplete === 'new-password' ? ' minlength="' . Shop\UserRepository::MIN_PASSWORD_LENGTH . '"' : '' ?>>
             </label>
             <button type="submit"><?= e($button) ?></button>
+            <p class="switch"><?= e($switch[0]) ?> <a href="<?= e($switch[2]) ?>"><?= e($switch[1]) ?></a></p>
         </form>
 <?php
 }

@@ -19,6 +19,7 @@ $catalog = new ProductRepository(db());
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     require_valid_post();
     $cart = cart();
+    $back = 'catalog'; // where the page scrolls to after the change
     $productId = int_input($_POST, 'product_id') ?? 0;
 
     try {
@@ -29,8 +30,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 break;
             case 'remove':
                 $cart->remove($productId);
+                $back = 'cart';
                 break;
             case 'checkout':
+                $back = 'cart';
                 // Prices come from the database here too, never from the form.
                 $orderId = (new OrderRepository(db()))->place($userId, $cart->lines($catalog));
                 save_cart(Cart::fromArray([]));
@@ -44,14 +47,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     save_cart($cart);
-    redirect('products.php');
+    redirect('products.php#' . $back);
 }
 
 $lines = cart()->lines($catalog);
 
-page_start('Products', 'products-hero.jpg');
+page_start('Products', 'products-hero.jpg', next: 'catalog');
 ?>
-        <section class="products" aria-labelledby="catalog-title">
+        <section id="catalog" class="products" aria-labelledby="catalog-title">
             <h2 id="catalog-title">Our furniture</h2>
             <ul class="product-grid">
 <?php foreach ($catalog->all() as $product): ?>
@@ -73,7 +76,7 @@ page_start('Products', 'products-hero.jpg');
             </ul>
         </section>
 
-        <section class="card order" aria-labelledby="cart-title">
+        <section id="cart" class="card order" aria-labelledby="cart-title">
             <h2 id="cart-title">Your cart</h2>
 <?php if ($lines === []): ?>
             <p>Your cart is empty.</p>

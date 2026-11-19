@@ -55,8 +55,8 @@ expect "the shop lists the products" "$(get products.php)" '^200$'
 page_has "the chaise longue is for sale at its database price" '349.00 €'
 csrf="$(token)"
 
-expect "adding to the cart redirects back to the shop" \
-    "$(post products.php --data "csrf_token=$csrf&action=add&product_id=1&quantity=2&price=0.01&Price=0.01")" '^303 '
+expect "adding to the cart goes back to the product list" \
+    "$(post products.php --data "csrf_token=$csrf&action=add&product_id=1&quantity=2&price=0.01&Price=0.01")" '^303 .*/products\.php#catalog$'
 get products.php > /dev/null
 page_has "the cart uses the real price, not one sent by the browser" '698.00 €'
 keep products
@@ -79,7 +79,7 @@ expect "the order page shows the order" "$(get "$first_order")" '^200$'
 page_has "with the total of both products" '887.50 €'
 keep thanks
 expect "checking out again with an empty cart places no order" \
-    "$(post products.php --data "csrf_token=$csrf&action=checkout")" '^303 .*/products\.php$'
+    "$(post products.php --data "csrf_token=$csrf&action=checkout")" '^303 .*/products\.php#cart$'
 get products.php > /dev/null
 page_has "and says the cart is empty" 'Your cart is empty.'
 

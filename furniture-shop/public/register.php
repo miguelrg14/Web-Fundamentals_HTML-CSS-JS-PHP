@@ -29,9 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-page_start('Sign up', 'register.jpg');
-credentials_form('register.php', 'Create account', $email, $error, 'new-password');
-?>
-        <p class="switch">Already have an account? <a href="login.php">Log in</a></p>
-<?php
+page_start('Sign up', 'register.jpg', static function () use ($email, $error): void {
+    credentials_form('register.php', 'Create account', $email, $error, 'new-password', ['Already have an account?', 'Log in', 'login.php']);
+});
 page_end();

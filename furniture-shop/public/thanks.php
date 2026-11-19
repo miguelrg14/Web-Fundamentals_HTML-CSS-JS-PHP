@@ -17,9 +17,9 @@ if ($order === null) {
     http_response_code(404);
 }
 
-page_start('Thanks for buying!', 'thanks.jpg');
+page_start('Thanks for buying!', 'thanks.jpg', next: 'order');
 ?>
-        <section class="card order" aria-labelledby="order-title">
+        <section id="order" class="card order" aria-labelledby="order-title">
 <?php if ($order === null): ?>
             <h2 id="order-title">Order not found</h2>
             <p><a href="products.php">Back to the shop</a></p>

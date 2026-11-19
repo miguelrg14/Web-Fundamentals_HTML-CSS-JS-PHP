@@ -50,13 +50,45 @@ npm run validate   # HTML validation
 A small online shop: visitors sign up or log in, add furniture to the cart and check out. Orders are stored
 in MySQL and each user can see their own.
 
+Already have Docker? Then it's two commands:
+
 ```bash
 cd furniture-shop
 docker compose up --build    # then open http://localhost:8080
 ```
 
 Docker Compose starts MySQL 8.4, creates the tables from [`database/schema.sql`](furniture-shop/database/schema.sql)
-and serves the shop with PHP 8.3 and Apache. `docker compose down -v` deletes the data.
+and serves the shop with PHP 8.3 and Apache. Nothing else needs installing: no PHP, MySQL or XAMPP.
+
+### Running it step by step (first time with Docker)
+
+1. **Install Docker Desktop** from [docker.com](https://www.docker.com/products/docker-desktop/) (free for personal
+   use). On Windows, keep the "Use WSL 2" option ticked and restart when asked.
+2. **Open Docker Desktop** and wait until it shows *Engine running*.
+3. **Get the code**: download this repository (*Code → Download ZIP*, then unzip it) or clone it with Git.
+4. **Open a terminal in the repository folder** (on Windows, right-click the folder → *Open in Terminal*) and run:
+
+   ```bash
+   cd furniture-shop
+   docker compose up --build
+   ```
+
+   The first run takes a few minutes while Docker downloads PHP and MySQL; later runs take seconds.
+   The shop is ready when new messages stop appearing.
+5. **Open <http://localhost:8080>**, sign up with any email and a password of at least 8 characters, add
+   some furniture to the cart and check out.
+
+| To… | Do this |
+|---|---|
+| Stop the shop | Press `Ctrl + C` in the terminal |
+| Start it again | `docker compose up` (add `--build` after changing the PHP code) |
+| Delete all accounts and orders | `docker compose down -v` |
+
+**Troubleshooting**
+
+- *"Cannot connect to the Docker daemon"*: Docker Desktop is closed or still starting.
+- *"port is already allocated"*: another program is using port 8080. Close it, or change `"8080:80"` to
+  `"8081:80"` in [`compose.yaml`](furniture-shop/compose.yaml) and open <http://localhost:8081>.
 
 ### How it's built
 

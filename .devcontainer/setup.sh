@@ -4,6 +4,8 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
+# The base image lists Yarn's package source, whose signing key has expired; we don't use Yarn.
+sudo rm -f /etc/apt/sources.list.d/yarn.list
 sudo apt-get update -qq
 sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq mariadb-server > /dev/null
 

@@ -19,13 +19,14 @@ if ($order === null) {
 
 page_start('Thanks for buying!', 'thanks.jpg', next: 'order');
 ?>
-        <section id="order" class="card order" aria-labelledby="order-title">
+        <section id="order" class="card receipt" aria-labelledby="order-title">
 <?php if ($order === null): ?>
             <h2 id="order-title">Order not found</h2>
-            <p><a href="products.php">Back to the shop</a></p>
+            <p><a class="button" href="products.php">Back to the shop</a></p>
 <?php else: ?>
+            <p class="confirmed"><?= icon('check') ?>Purchase confirmed</p>
             <h2 id="order-title">Order #<?= e($order['id']) ?></h2>
-            <p>Your purchase is confirmed. You will receive the package soon.</p>
+            <p class="muted">Your purchase is confirmed. You will receive the package soon.</p>
             <table>
                 <thead>
                     <tr><th scope="col">Product</th><th scope="col">Quantity</th><th scope="col">Price</th></tr>
@@ -43,7 +44,7 @@ page_start('Thanks for buying!', 'thanks.jpg', next: 'order');
                     <tr><th scope="row" colspan="2">Total</th><td><?= e(View::money($order['total_cents'])) ?></td></tr>
                 </tfoot>
             </table>
-            <p><a href="products.php">Keep shopping</a></p>
+            <p><a class="button" href="products.php">Keep shopping</a></p>
 <?php endif ?>
         </section>
 <?php

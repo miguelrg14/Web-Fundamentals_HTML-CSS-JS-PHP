@@ -54,65 +54,64 @@ $lines = cart()->lines($catalog);
 
 page_start('Products', 'products-hero.jpg', next: 'catalog');
 ?>
-        <section id="catalog" class="products" aria-labelledby="catalog-title">
-            <h2 id="catalog-title">Our furniture</h2>
-            <ul class="product-grid">
+        <div class="shop">
+            <section id="catalog" class="catalog" aria-labelledby="catalog-title">
+                <h2 id="catalog-title">Our furniture</h2>
+                <ul class="product-grid">
 <?php foreach ($catalog->all() as $product): ?>
-                <li class="card product">
-                    <img src="<?= e($product->image) ?>" alt="" width="900" height="600">
-                    <h3><?= e($product->name) ?></h3>
-                    <p class="price"><?= e(View::money($product->priceCents)) ?></p>
-                    <form action="products.php" method="post">
-                        <?= csrf_field() ?>
-                        <input type="hidden" name="action" value="add">
-                        <input type="hidden" name="product_id" value="<?= e($product->id) ?>">
-                        <label>Quantity
-                            <input type="number" name="quantity" value="1" min="1" max="<?= Cart::MAX_QUANTITY ?>" required>
-                        </label>
-                        <button type="submit">Add to cart</button>
-                    </form>
-                </li>
-<?php endforeach ?>
-            </ul>
-        </section>
-
-        <section id="cart" class="card order" aria-labelledby="cart-title">
-            <h2 id="cart-title">Your cart</h2>
-<?php if ($lines === []): ?>
-            <p>Your cart is empty.</p>
-<?php else: ?>
-            <table>
-                <thead>
-                    <tr><th scope="col">Product</th><th scope="col">Quantity</th><th scope="col">Price</th><th scope="col">Total</th><th scope="col"><span class="visually-hidden">Actions</span></th></tr>
-                </thead>
-                <tbody>
-<?php foreach ($lines as $line): ?>
-                    <tr>
-                        <td><?= e($line->product->name) ?></td>
-                        <td><?= e($line->quantity) ?></td>
-                        <td><?= e(View::money($line->product->priceCents)) ?></td>
-                        <td><?= e(View::money($line->subtotalCents())) ?></td>
-                        <td>
+                    <li class="card product">
+                        <img src="<?= e($product->image) ?>" alt="" width="900" height="600">
+                        <div class="product-body">
+                            <h3><?= e($product->name) ?></h3>
+                            <p class="price"><?= e(View::money($product->priceCents)) ?></p>
                             <form action="products.php" method="post">
                                 <?= csrf_field() ?>
-                                <input type="hidden" name="action" value="remove">
-                                <input type="hidden" name="product_id" value="<?= e($line->product->id) ?>">
-                                <button type="submit" class="danger">Remove</button>
+                                <input type="hidden" name="action" value="add">
+                                <input type="hidden" name="product_id" value="<?= e($product->id) ?>">
+                                <label>
+                                    <span class="visually-hidden">Quantity of <?= e($product->name) ?></span>
+                                    <input type="number" name="quantity" value="1" min="1" max="<?= Cart::MAX_QUANTITY ?>" required>
+                                </label>
+                                <button class="button" type="submit"><?= icon('cart') ?>Add to cart</button>
                             </form>
-                        </td>
-                    </tr>
+                        </div>
+                    </li>
 <?php endforeach ?>
-                </tbody>
-                <tfoot>
-                    <tr><th scope="row" colspan="3">Total</th><td><?= e(View::money(Cart::totalCents($lines))) ?></td><td></td></tr>
-                </tfoot>
-            </table>
-            <form action="products.php" method="post">
-                <?= csrf_field() ?>
-                <input type="hidden" name="action" value="checkout">
-                <button type="submit">Checkout</button>
-            </form>
+                </ul>
+            </section>
+
+            <aside id="cart" class="card cart" aria-labelledby="cart-title">
+                <h2 id="cart-title">Your cart</h2>
+<?php if ($lines === []): ?>
+                <p class="empty">Your cart is empty.</p>
+<?php else: ?>
+                <ul class="cart-lines">
+<?php foreach ($lines as $line): ?>
+                    <li>
+                        <div>
+                            <strong><?= e($line->product->name) ?></strong>
+                            <span class="muted"><?= e($line->quantity) ?> × <?= e(View::money($line->product->priceCents)) ?></span>
+                        </div>
+                        <span class="subtotal"><?= e(View::money($line->subtotalCents())) ?></span>
+                        <form action="products.php" method="post">
+                            <?= csrf_field() ?>
+                            <input type="hidden" name="action" value="remove">
+                            <input type="hidden" name="product_id" value="<?= e($line->product->id) ?>">
+                            <button class="icon-button" type="submit" title="Remove">
+                                <?= icon('trash') ?><span class="visually-hidden">Remove <?= e($line->product->name) ?></span>
+                            </button>
+                        </form>
+                    </li>
+<?php endforeach ?>
+                </ul>
+                <p class="total"><span>Total</span><strong><?= e(View::money(Cart::totalCents($lines))) ?></strong></p>
+                <form action="products.php" method="post">
+                    <?= csrf_field() ?>
+                    <input type="hidden" name="action" value="checkout">
+                    <button class="button wide" type="submit">Checkout</button>
+                </form>
 <?php endif ?>
-        </section>
+            </aside>
+        </div>
 <?php
 page_end();

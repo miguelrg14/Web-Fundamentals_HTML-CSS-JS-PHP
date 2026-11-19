@@ -40,7 +40,7 @@ function page_start(string $title, string $heroImage): void
     <main>
         <div class="hero">
             <h1><?= e($title) ?></h1>
-            <img src="images/<?= e($heroImage) ?>" alt="">
+            <img src="images/<?= e($heroImage) ?>" alt="" width="1600" height="1067">
         </div>
 <?php
     $message = flash();

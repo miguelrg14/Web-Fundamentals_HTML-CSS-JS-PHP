@@ -11,56 +11,66 @@
 <body>
     <header>
         <nav aria-label="Main">
-            <a class="brand" href="index.html">Miguel<span>Rodríguez</span></a>
+            <a class="brand" href="index.html">Miguel <span>Rodríguez</span></a>
             <ul>
                 <li><a href="index.html" aria-current="page">About me</a></li>
                 <li><a href="design.html">Design and art</a></li>
                 <li><a href="programming.html">Programming</a></li>
                 <li><a href="sound.html">Sound</a></li>
             </ul>
-            <a class="contact-button" href="contact.html">Contact</a>
+            <a class="button small" href="contact.html">Contact</a>
         </nav>
     </header>
 
     <main>
-        <section>
-            <h1>Miguel Rodríguez Gallego</h1>
-            <div class="row">
-                <figure class="portrait"><img src="images/amalfi-cove.jpg" alt="Cove on the Amalfi coast" width="640" height="640"></figure>
-                <div>
-                    <p>Hi, my name is Miguel Rodríguez Gallego! I'm a game developer from Galicia, Spain.</p>
-                    <div class="social">
-                        <a href="https://www.youtube.com/channel/UC5S4QAl611cfyK8YukGAZYg"><img src="images/icons/youtube.png" alt="YouTube" width="50" height="50"></a>
-                        <a href="https://www.instagram.com/miguel_rg14/"><img src="images/icons/instagram.png" alt="Instagram" width="50" height="50"></a>
-                        <a href="https://twitter.com/Miguelg59721714"><img src="images/icons/twitter.png" alt="Twitter" width="50" height="50"></a>
-                        <a href="https://soundcloud.com/user-448134376"><img src="images/icons/soundcloud.png" alt="SoundCloud" width="50" height="50"></a>
-                    </div>
-                </div>
+        <section class="intro">
+            <img class="portrait" src="images/portrait.jpg" alt="Miguel Rodríguez Gallego on the Amalfi coast" width="640" height="640">
+            <div>
+                <p class="eyebrow">Game developer · Galicia, Spain</p>
+                <h1>Hi, I'm Miguel Rodríguez Gallego!</h1>
+                <p class="lead">I make games and the art, code and sound that go into them.</p>
+                <p class="actions">
+                    <a class="button" href="programming.html">See my work <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+                    <a class="button ghost" href="contact.html">Contact me</a>
+                </p>
+                    <ul class="social" aria-label="Social media">
+                        <li><a href="https://www.youtube.com/channel/UC5S4QAl611cfyK8YukGAZYg"><img src="images/icons/youtube.png" alt="YouTube" width="50" height="50"></a></li>
+                        <li><a href="https://www.instagram.com/miguel_rg14/"><img src="images/icons/instagram.png" alt="Instagram" width="50" height="50"></a></li>
+                        <li><a href="https://twitter.com/Miguelg59721714"><img src="images/icons/twitter.png" alt="Twitter" width="50" height="50"></a></li>
+                        <li><a href="https://soundcloud.com/user-448134376"><img src="images/icons/soundcloud.png" alt="SoundCloud" width="50" height="50"></a></li>
+                    </ul>
             </div>
         </section>
 
+        <section class="split">
+            <div>
+                <h2>About me</h2>
+                <p>I've loved video games since I was little, but they are not my only passion.</p>
+                <p>
+                    I've always liked sports and music, among other things. I know the basics and the technical side of
+                    sound and music production on the computer, and I also love DJing.
+                </p>
+                <p>
+                    I see myself as a passionate, energetic and cheerful person who loves learning new things. Every day
+                    I try to be a better version of myself and to be original in what I do.
+                </p>
+                <p>I'm always open to new challenges, and I try my best to do things well.</p>
+            </div>
+            <img class="photo" src="images/positano.jpg" alt="Miguel sitting on a wall above Positano" width="1200" height="1600" loading="lazy">
+        </section>
+
         <section>
-            <h2>About me</h2>
-            <div class="row reverse">
-                <figure class="small"><img src="images/positano.jpg" alt="Houses of Positano above the sea" width="1200" height="1600"></figure>
-                <div>
-                    <p>I've loved video games since I was little, but they are not my only passion.</p>
-                    <p>
-                        I've always liked sports and music, among other things. I know the basics and the technical side of
-                        sound and music production on the computer, and I also love DJing.
-                    </p>
-                    <p>
-                        I see myself as a passionate, energetic and cheerful person who loves learning new things. Every day
-                        I try to be a better version of myself and to be original in what I do.
-                    </p>
-                    <p>I'm always open to new challenges, and I try my best to do things well.</p>
-                </div>
+            <h2>What I do</h2>
+            <div class="grid three">
+                <a class="tile" href="design.html"><h3>Design and art</h3><p>Illustration, pixel art, 3D models and drawing.</p></a>
+                <a class="tile" href="programming.html"><h3>Programming</h3><p>C# and object-oriented design; games in Unity.</p></a>
+                <a class="tile" href="sound.html"><h3>Sound</h3><p>Music production, sound design and DJing.</p></a>
             </div>
         </section>
     </main>
 
     <footer>
-        <p>Website made by Miguel Rodríguez Gallego</p>
+        <p>© Miguel Rodríguez Gallego</p>
         <p><a href="mailto:miguelrodriguezgallego1@gmail.com">miguelrodriguezgallego1@gmail.com</a></p>
         <p><a href="../">All projects</a></p>
     </footer>

@@ -11,58 +11,74 @@
 <body>
     <header>
         <nav aria-label="Main">
-            <a class="brand" href="index.html">Miguel<span>Rodríguez</span></a>
+            <a class="brand" href="index.html">Miguel <span>Rodríguez</span></a>
             <ul>
                 <li><a href="index.html">About me</a></li>
                 <li><a href="design.html" aria-current="page">Design and art</a></li>
                 <li><a href="programming.html">Programming</a></li>
                 <li><a href="sound.html">Sound</a></li>
             </ul>
-            <a class="contact-button" href="contact.html">Contact</a>
+            <a class="button small" href="contact.html">Contact</a>
         </nav>
     </header>
 
     <main>
-        <section>
+        <section class="page-title">
             <h1>Design and art</h1>
-            <div class="row">
-                <figure class="wide"><img src="images/art/cowboy-digital.jpg" alt="Digital illustration of a green-skinned cowboy firing a revolver at sunset" width="1600" height="1126"></figure>
-                <div><p>I can use Illustrator to create pictures from scratch.</p></div>
-            </div>
-            <div class="row reverse">
-                <figure class="small"><img src="images/art/explorer.webp" alt="Illustration of an explorer with goggles and a torch finding a chest in a cave" width="1131" height="1600"></figure>
-                <div><p>I can also edit and paint in Photoshop when I need to.</p></div>
-            </div>
-            <div class="row">
-                <figure class="wide"><img src="images/art/hospital-pixel-art.png" alt="Isometric pixel art of a hospital and its garden" width="1900" height="1300"></figure>
-                <div><p>I do pixel art too.</p></div>
-            </div>
-            <div class="row reverse">
-                <figure class="small"><img src="images/art/zombie-game.png" alt="Top-down pixel art scene of a zombie arcade game" width="560" height="880"></figure>
-                <div><p>I even made a pixel art arcade game about zombie hordes, drawing everything myself.</p></div>
+            <p class="lead">Pictures I've made for games and for fun.</p>
+        </section>
+
+        <section>
+            <div class="grid two">
+                <article class="card contain">
+                    <img src="images/art/cowboy-digital.jpg" alt="Digital illustration of a green-skinned cowboy firing a revolver at sunset" width="1600" height="1126" loading="lazy">
+                    <div class="card-body">
+                        <h3>Illustration</h3>
+                        <p>I can use Illustrator to create pictures from scratch.</p>
+                    </div>
+                </article>
+                <article class="card contain">
+                    <img src="images/art/explorer.webp" alt="Illustration of an explorer with goggles and a torch finding a chest in a cave" width="1131" height="1600" loading="lazy">
+                    <div class="card-body">
+                        <h3>Digital painting</h3>
+                        <p>I can also edit and paint in Photoshop when I need to.</p>
+                    </div>
+                </article>
+                <article class="card contain pixel">
+                    <img src="images/art/hospital-pixel-art.png" alt="Isometric pixel art of a hospital and its garden" width="1900" height="1300" loading="lazy">
+                    <div class="card-body">
+                        <h3>Pixel art</h3>
+                        <p>I do pixel art too.</p>
+                    </div>
+                </article>
+                <article class="card contain pixel">
+                    <img src="images/art/zombie-game.png" alt="Top-down pixel art scene of a zombie arcade game" width="560" height="880" loading="lazy">
+                    <div class="card-body">
+                        <h3>Pixel art game</h3>
+                        <p>I even made a pixel art arcade game about zombie hordes, drawing everything myself.</p>
+                    </div>
+                </article>
             </div>
         </section>
 
         <section>
             <h2>3D</h2>
             <p>I can make 3D models, unwrap UVs and build characters and low-poly, optimised models. This is a model of Alcatraz I made:</p>
-            <div class="row">
-                <figure class="wide"><img src="images/art/alcatraz-1.webp" alt="3D model of Alcatraz island, first view" width="1559" height="909"></figure>
-                <figure class="wide"><img src="images/art/alcatraz-2.webp" alt="3D model of Alcatraz island, second view" width="1560" height="849"></figure>
+            <div class="grid two">
+                <img class="photo" src="images/art/alcatraz-1.webp" alt="3D model of Alcatraz, a long cell block" width="1559" height="909" loading="lazy">
+                <img class="photo" src="images/art/alcatraz-2.webp" alt="3D model of Alcatraz, cells on both sides of a corridor" width="1560" height="849" loading="lazy">
             </div>
         </section>
 
         <section>
             <h2>Drawing</h2>
-            <div class="row">
-                <div><p>Drawing on paper is not my strongest skill, but I can still do it well.</p></div>
-                <figure class="wide"><img src="images/art/cowboy-drawing.jpg" alt="Watercolour character sheet of a cowboy and the same cowboy running through a western town" width="1600" height="1200"></figure>
-            </div>
+            <p>Drawing on paper is not my strongest skill, but I can still do it well.</p>
+            <img class="photo" src="images/art/cowboy-drawing.jpg" alt="Watercolour character sheet of a cowboy and the same cowboy running through a western town" width="1600" height="1200" loading="lazy">
         </section>
     </main>
 
     <footer>
-        <p>Website made by Miguel Rodríguez Gallego</p>
+        <p>© Miguel Rodríguez Gallego</p>
         <p><a href="mailto:miguelrodriguezgallego1@gmail.com">miguelrodriguezgallego1@gmail.com</a></p>
         <p><a href="../">All projects</a></p>
     </footer>

@@ -98,3 +98,14 @@ jobs:
       - name: Stop
         if: always()
         run: docker compose down --volumes
+
+  codespace:
+    name: Dev container (GitHub Codespaces)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build the dev container, start the shop in it and test it
+        uses: devcontainers/ci@v0.3
+        with:
+          push: never
+          runCmd: furniture-shop/tests/smoke.sh http://localhost:8080

@@ -13,7 +13,7 @@ refactored into one repository: three static sites you can **open in the browser
 | [Costa Verde](sites/costa-verde) | Two-page tourism site: semantic HTML, fixed menu, CSS animations, in-page navigation | [Live](https://miguelrg14.github.io/Web-Fundamentals_HTML-CSS-JS-PHP/costa-verde/) |
 | [Personal site](sites/personal-site) | Portfolio with my art, programming projects and music; audio, video and a contact form | [Live](https://miguelrg14.github.io/Web-Fundamentals_HTML-CSS-JS-PHP/personal-site/) |
 | [DNI letter calculator](sites/dni-validator) | JavaScript form validation and DOM updates; works out and checks Spanish DNI/NIE letters | [Live](https://miguelrg14.github.io/Web-Fundamentals_HTML-CSS-JS-PHP/dni-validator/) |
-| [Furniture shop](furniture-shop) | PHP + MySQL: accounts, sessions, cart and orders, built with security in mind | [Run with Docker](#furniture-shop-php--mysql) |
+| [Furniture shop](furniture-shop) | PHP + MySQL: accounts, sessions, cart and orders, built with security in mind | [Watch](#furniture-shop-php--mysql) · [Open in Codespaces](https://codespaces.new/miguelrg14/Web-Fundamentals_HTML-CSS-JS-PHP?quickstart=1) |
 
 ## Screenshots
 
@@ -50,6 +50,22 @@ npm run validate   # HTML validation
 A small online shop: visitors sign up or log in, add furniture to the cart and check out. Orders are stored
 in MySQL and each user can see their own.
 
+![Signing up, adding furniture to the cart and checking out](docs/screenshots/furniture-shop-demo.gif)
+
+### Try it in your browser (nothing to install)
+
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/miguelrg14/Web-Fundamentals_HTML-CSS-JS-PHP?quickstart=1)
+
+1. Click the button above and then **Create codespace** (you need to be signed in to GitHub; personal accounts
+   get free monthly Codespaces hours).
+2. Wait a couple of minutes while it starts PHP and MySQL. The shop opens in a new tab by itself; if it
+   doesn't, open the **Ports** tab at the bottom and click the globe icon next to port 8080.
+3. Sign up with any email and a password of at least 8 characters, and shop.
+
+When you're done, stop or delete the codespace from [github.com/codespaces](https://github.com/codespaces).
+
+### Run it on your computer with Docker
+
 Already have Docker? Then it's two commands:
 
 ```bash
@@ -60,7 +76,7 @@ docker compose up --build    # then open http://localhost:8080
 Docker Compose starts MySQL 8.4, creates the tables from [`database/schema.sql`](furniture-shop/database/schema.sql)
 and serves the shop with PHP 8.3 and Apache. Nothing else needs installing: no PHP, MySQL or XAMPP.
 
-### Running it step by step (first time with Docker)
+#### Step by step (first time with Docker)
 
 1. **Install Docker Desktop** from [docker.com](https://www.docker.com/products/docker-desktop/) (free for personal
    use). On Windows, keep the "Use WSL 2" option ticked and restart when asked.
@@ -84,7 +100,7 @@ and serves the shop with PHP 8.3 and Apache. Nothing else needs installing: no P
 | Start it again | `docker compose up` (add `--build` after changing the PHP code) |
 | Delete all accounts and orders | `docker compose down -v` |
 
-**Troubleshooting**
+#### Troubleshooting
 
 - *"Cannot connect to the Docker daemon"*: Docker Desktop is closed or still starting.
 - *"port is already allocated"*: another program is using port 8080. Close it, or change `"8080:80"` to
@@ -157,6 +173,8 @@ tests/smoke.sh http://localhost:8080    # end-to-end checks against the running 
 2. **Shop**: PHP syntax check, PHPUnit against a MySQL service, the end-to-end test against the PHP server,
    and validation of the HTML the shop generates.
 3. **Docker**: builds the image, starts the whole stack with Docker Compose and runs the end-to-end test against it.
+4. **Codespaces**: builds the [dev container](.devcontainer/devcontainer.json), lets it start the shop as a codespace
+   would, and runs the end-to-end test inside it.
 
 [Another workflow](.github/workflows/pages.yml) publishes `sites/` to GitHub Pages.
 

@@ -1,0 +1,29 @@
+// GitHub Codespaces / Dev Containers: opens the repository in the cloud and starts the
+// furniture shop (PHP + MySQL) with Docker Compose. The shop opens on port 8080.
+{
+  "name": "Web Fundamentals",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+    "ghcr.io/devcontainers/features/node:1": { "version": "22" }
+  },
+  "hostRequirements": { "cpus": 2 },
+
+  // Install the tools for the static sites once, then start the shop every time the codespace starts.
+  "postCreateCommand": "npm ci",
+  "postStartCommand": "bash .devcontainer/start-shop.sh",
+
+  "forwardPorts": [8080],
+  "portsAttributes": {
+    "8080": { "label": "Furniture shop", "onAutoForward": "openBrowser" }
+  },
+
+  "customizations": {
+    "codespaces": {
+      "openFiles": ["README.md"]
+    },
+    "vscode": {
+      "extensions": ["bmewburn.vscode-intelephense-client", "html-validate.vscode-html-validate"]
+    }
+  }
+}
